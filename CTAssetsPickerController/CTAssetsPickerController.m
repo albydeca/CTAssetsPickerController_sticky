@@ -31,7 +31,7 @@
 #import "NSDate+TimeInterval.h"
 
 #define IS_IOS7             ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
-#define kThumbnailLength    106.6f
+#define kThumbnailLength    105.0f
 #define kThumbnailSize      CGSizeMake(kThumbnailLength, kThumbnailLength)
 #define kPopoverContentSize CGSizeMake(320, 480)
 
@@ -831,9 +831,8 @@ static UIColor *disabledColor;
     titleHeight     = 20.0f;
     videoIcon       = [UIImage imageNamed:@"CTAssetsPickerVideo"];
     titleColor      = [UIColor whiteColor];
-    //    checkedIcon     = [UIImage imageNamed:(!IS_IOS7) ? @"CTAssetsPickerChecked~iOS6" : @"CTAssetsPickerChecked"];
-    checkedIcon     = [UIImage imageNamed:(!IS_IOS7) ? @"myTick" : @"myTick"];
-    uncheckedIcon     = [UIImage imageNamed:(!IS_IOS7) ? @"myUncheckedTick" : @"myUncheckedTick"];
+    checkedIcon     = [UIImage imageNamed:@"Sticky9_checkedPicker"];
+    uncheckedIcon     = [UIImage imageNamed:@"Sticky9_uncheckedPicker"];
     selectedColor   = [UIColor colorWithWhite:1 alpha:0.3];
     disabledColor   = [UIColor colorWithWhite:1 alpha:0.9];
 }
