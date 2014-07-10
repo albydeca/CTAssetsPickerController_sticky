@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Clement T" => "chiunam@gmail.com" }
   s.platform     = :ios, '6.0'
-  s.source       = { :git => "https://github.com/chiunam/CTAssetsPickerController.git", :tag => "v1.3.3" }
+  s.source       = { :git => "https://github.com/albydeca/CTAssetsPickerController_sticky.git", :tag => "v1.3.3" }
   s.source_files = "CTAssetsPickerController/*.{h,m}"
   s.resource     = "CTAssetsPickerController/Images.xcassets/*/*.png"
   s.framework    = "AssetsLibrary"
