@@ -31,7 +31,7 @@
 #import "NSDate+TimeInterval.h"
 
 #define IS_IOS7             ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
-#define kThumbnailLength    78.0f
+#define kThumbnailLength    106.6f
 #define kThumbnailSize      CGSizeMake(kThumbnailLength, kThumbnailLength)
 #define kPopoverContentSize CGSizeMake(320, 480)
 
@@ -289,14 +289,14 @@
     ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
         
         [self showNotAllowed];
-
+        
     };
     
     // Enumerate Camera roll first
     [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
                                       usingBlock:resultsBlock
                                     failureBlock:failureBlock];
-
+    
     // Then all other groups
     NSUInteger type =
     ALAssetsGroupLibrary | ALAssetsGroupAlbum | ALAssetsGroupEvent |
@@ -338,7 +338,7 @@
 {
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
         [self setEdgesForExtendedLayout:UIRectEdgeLeft | UIRectEdgeRight | UIRectEdgeBottom];
-
+    
     self.title              = nil;
     
     UIImageView *padlock    = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CTAssetsPickerLocked"]];
@@ -347,7 +347,7 @@
     UILabel *title          = [UILabel new];
     title.translatesAutoresizingMaskIntoConstraints = NO;
     title.preferredMaxLayoutWidth = 304.0f;
-
+    
     UILabel *message        = [UILabel new];
     message.translatesAutoresizingMaskIntoConstraints = NO;
     message.preferredMaxLayoutWidth = 304.0f;
@@ -366,7 +366,7 @@
     
     [title sizeToFit];
     [message sizeToFit];
-
+    
     UIView *centerView = [UIView new];
     centerView.translatesAutoresizingMaskIntoConstraints = NO;
     [centerView addSubview:padlock];
@@ -374,12 +374,12 @@
     [centerView addSubview:message];
     
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(padlock, title, message);
-
+    
     [centerView addConstraint:[NSLayoutConstraint constraintWithItem:padlock attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:centerView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
     [centerView addConstraint:[NSLayoutConstraint constraintWithItem:title attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:padlock attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
     [centerView addConstraint:[NSLayoutConstraint constraintWithItem:message attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:padlock attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
     [centerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[padlock]-[title]-[message]|" options:0 metrics:nil views:viewsDictionary]];
-
+    
     UIView *backgroundView = [UIView new];
     [backgroundView addSubview:centerView];
     [backgroundView addConstraint:[NSLayoutConstraint constraintWithItem:centerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:backgroundView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
@@ -419,7 +419,7 @@
     centerView.translatesAutoresizingMaskIntoConstraints = NO;
     [centerView addSubview:title];
     [centerView addSubview:message];
-
+    
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(title, message);
     
     [centerView addConstraint:[NSLayoutConstraint constraintWithItem:title attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:centerView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
@@ -476,7 +476,7 @@
     CTAssetsViewController *vc = [[CTAssetsViewController alloc] init];
     vc.assetsGroup = [self.groups objectAtIndex:indexPath.row];
     vc.currentSelectedAssets = self.selectedAssets;
-
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -584,7 +584,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setupAssets];    
+    [self setupAssets];
 }
 
 
@@ -639,7 +639,7 @@
         [self.assets removeAllObjects];
     
     ALAssetsGroupEnumerationResultsBlock resultsBlock = ^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-
+        
         if (asset)
         {
             [self.assets addObject:asset];
@@ -681,19 +681,19 @@
 {
     static NSString *CellIdentifier = kAssetsViewCellIdentifier;
     CTAssetsPickerController *picker = (CTAssetsPickerController *)self.navigationController;
-
+    
     CTAssetsViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-
+    
     ALAsset* asset = [self.assets objectAtIndex:indexPath.row];
     [cell bind:asset];
     cell.disabled = ! [picker.selectionFilter evaluateWithObject:asset];
-
+    
     if ([self.currentSelectedAssets containsObject:asset]) {
         cell.selected = YES;
         [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-//        CTAssetsPickerController *vc = (CTAssetsPickerController *)self.navigationController;
-//        vc.indexPathsForSelectedItems = collectionView.indexPathsForSelectedItems;
-//        [self setTitleWithSelectedIndexPaths:collectionView.indexPathsForSelectedItems];
+        //        CTAssetsPickerController *vc = (CTAssetsPickerController *)self.navigationController;
+        //        vc.indexPathsForSelectedItems = collectionView.indexPathsForSelectedItems;
+        //        [self setTitleWithSelectedIndexPaths:collectionView.indexPathsForSelectedItems];
     }
     return cell;
 }
@@ -718,7 +718,7 @@
     CTAssetsPickerController *vc = (CTAssetsPickerController *)self.navigationController;
     ALAsset* asset = [self.assets objectAtIndex:indexPath.row];
     BOOL selectable = [vc.selectionFilter evaluateWithObject:asset];
-
+    
     return (selectable && collectionView.indexPathsForSelectedItems.count < vc.maximumNumberOfSelection);
 }
 
@@ -740,7 +740,7 @@
     
     if ([vc.delegate respondsToSelector:@selector(assetsPickerController:didDeselectItemAtIndexPath:)])
         [vc.delegate assetsPickerController:vc didDeselectItemAtIndexPath:indexPath];
-
+    
     [self setTitleWithSelectedIndexPaths:collectionView.indexPathsForSelectedItems];
 }
 
@@ -780,7 +780,7 @@
     
     else if (photosSelected)
         format = (indexPaths.count > 1) ? NSLocalizedString(@"%ld Photos Selected", nil) : NSLocalizedString(@"%ld Photo Selected", nil);
-
+    
     else if (videoSelected)
         format = (indexPaths.count > 1) ? NSLocalizedString(@"%ld Videos Selected", nil) : NSLocalizedString(@"%ld Video Selected", nil);
     
@@ -821,6 +821,7 @@ static CGFloat titleHeight;
 static UIImage *videoIcon;
 static UIColor *titleColor;
 static UIImage *checkedIcon;
+static UIImage *uncheckedIcon;
 static UIColor *selectedColor;
 static UIColor *disabledColor;
 
@@ -830,7 +831,9 @@ static UIColor *disabledColor;
     titleHeight     = 20.0f;
     videoIcon       = [UIImage imageNamed:@"CTAssetsPickerVideo"];
     titleColor      = [UIColor whiteColor];
-    checkedIcon     = [UIImage imageNamed:(!IS_IOS7) ? @"CTAssetsPickerChecked~iOS6" : @"CTAssetsPickerChecked"];
+    //    checkedIcon     = [UIImage imageNamed:(!IS_IOS7) ? @"CTAssetsPickerChecked~iOS6" : @"CTAssetsPickerChecked"];
+    checkedIcon     = [UIImage imageNamed:(!IS_IOS7) ? @"myTick" : @"myTick"];
+    uncheckedIcon     = [UIImage imageNamed:(!IS_IOS7) ? @"myUncheckedTick" : @"myUncheckedTick"];
     selectedColor   = [UIColor colorWithWhite:1 alpha:0.3];
     disabledColor   = [UIColor colorWithWhite:1 alpha:0.9];
 }
@@ -895,7 +898,7 @@ static UIColor *disabledColor;
         CGPoint endPoint        = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
         
         CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation);
-
+        
         
         CGSize titleSize        = [self.title sizeWithFont:titleFont];
         [titleColor set];
@@ -922,7 +925,9 @@ static UIColor *disabledColor;
 		CGContextSetFillColorWithColor(context, selectedColor.CGColor);
 		CGContextFillRect(context, rect);
         
-        [checkedIcon drawAtPoint:CGPointMake(CGRectGetMaxX(rect) - checkedIcon.size.width, CGRectGetMinY(rect))];
+        [checkedIcon drawAtPoint:CGPointMake(CGRectGetMaxX(rect) - checkedIcon.size.width, CGRectGetMaxY(rect) - checkedIcon.size.height)];
+    }else if(!self.selected){
+        [uncheckedIcon drawAtPoint:CGPointMake(CGRectGetMaxX(rect) - uncheckedIcon.size.width, CGRectGetMaxY(rect) - checkedIcon.size.height)];
     }
 }
 
@@ -935,14 +940,14 @@ static UIColor *disabledColor;
     NSString *type                  = [self.asset valueForProperty:ALAssetPropertyType];
     NSDate *date                    = [self.asset valueForProperty:ALAssetPropertyDate];
     CGSize dimension                = representation.dimensions;
-
+    
     
     // Type
     if ([type isEqual:ALAssetTypeVideo])
         [labels addObject:NSLocalizedString(@"Video", nil)];
     else
         [labels addObject:NSLocalizedString(@"Photo", nil)];
-
+    
     // Orientation
     if (dimension.height >= dimension.width)
         [labels addObject:NSLocalizedString(@"Portrait", nil)];

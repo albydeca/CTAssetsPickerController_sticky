@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D5679CFF-26A7-4448-B903-F9B36BE7E04E</string>
+	<string>60855BB9-ECD0-44D8-94E9-AFC6BF368F20</string>
 	<key>IDESourceControlProjectName</key>
 	<string>CTAssetsPickerDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D9EC8C29-BA4C-444F-963A-B0C37BF8748E</key>
-		<string>https://github.com/elliott-minns/CTAssetsPickerController.git</string>
+		<key>516AECED-7D17-430D-AC69-767B6DEE20F8</key>
+		<string>ssh://github.com/albydeca/CTAssetsPickerController_sticky.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>CTAssetsPickerDemo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D9EC8C29-BA4C-444F-963A-B0C37BF8748E</key>
+		<key>516AECED-7D17-430D-AC69-767B6DEE20F8</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/elliott-minns/CTAssetsPickerController.git</string>
+	<string>ssh://github.com/albydeca/CTAssetsPickerController_sticky.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D9EC8C29-BA4C-444F-963A-B0C37BF8748E</string>
+	<string>516AECED-7D17-430D-AC69-767B6DEE20F8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D9EC8C29-BA4C-444F-963A-B0C37BF8748E</string>
+			<string>516AECED-7D17-430D-AC69-767B6DEE20F8</string>
 			<key>IDESourceControlWCCName</key>
-			<string>CTAssetsPickerController</string>
+			<string>CTAssetsPickerController_sticky</string>
 		</dict>
 	</array>
 </dict>
