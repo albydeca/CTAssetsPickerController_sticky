@@ -31,7 +31,7 @@
 #import "NSDate+TimeInterval.h"
 
 #define IS_IOS7             ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
-#define kThumbnailLength    105.0f
+#define kThumbnailLength    106.5f
 #define kThumbnailSize      CGSizeMake(kThumbnailLength, kThumbnailLength)
 #define kPopoverContentSize CGSizeMake(320, 480)
 
@@ -61,7 +61,7 @@
 
 #pragma mark - Interfaces
 
-@interface CTAssetsPickerController ()
+@interface CTAssetsPickerController () <UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, copy) NSArray *indexPathsForSelectedItems;
 
@@ -81,7 +81,7 @@
 @end
 
 
-@interface CTAssetsViewController : UICollectionViewController
+@interface CTAssetsViewController : UICollectionViewController <UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) ALAssetsGroup *assetsGroup;
 
@@ -745,6 +745,33 @@
 }
 
 
+#pragma mark - UICollectionViewDelegateFlowLayout Methods
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item % 3 == 1) {
+        return CGSizeMake(108, 106);
+    } else {
+        return CGSizeMake(106, 106);
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
 #pragma mark - Title
 
 - (void)setTitleWithSelectedIndexPaths:(NSArray *)indexPaths
@@ -873,7 +900,7 @@ static UIColor *disabledColor;
 - (void)drawRect:(CGRect)rect
 {
     // Image
-    [self.image drawInRect:CGRectMake(0, 0, kThumbnailLength, kThumbnailLength)];
+    [self.image drawInRect:rect];
     
     // Video title
     if ([self.type isEqual:ALAssetTypeVideo])
