@@ -34,6 +34,7 @@
 #define kThumbnailLength    106.5f
 #define kThumbnailSize      CGSizeMake(kThumbnailLength, kThumbnailLength)
 #define kPopoverContentSize CGSizeMake(320, 480)
+#define checkboxMargins 5
 
 #pragma mark - ALAsset
 
@@ -951,9 +952,9 @@ static UIColor *disabledColor;
 		CGContextSetFillColorWithColor(context, selectedColor.CGColor);
 		CGContextFillRect(context, rect);
         
-        [checkedIcon drawAtPoint:CGPointMake(CGRectGetMaxX(rect) - checkedIcon.size.width, CGRectGetMaxY(rect) - checkedIcon.size.height)];
+        [checkedIcon drawAtPoint:CGPointMake(CGRectGetMaxX(rect) - checkedIcon.size.width - checkboxMargins, CGRectGetMaxY(rect) - checkedIcon.size.height - checkboxMargins)];
     }else if(!self.selected){
-        [uncheckedIcon drawAtPoint:CGPointMake(CGRectGetMaxX(rect) - uncheckedIcon.size.width, CGRectGetMaxY(rect) - checkedIcon.size.height)];
+        [uncheckedIcon drawAtPoint:CGPointMake(CGRectGetMaxX(rect) - uncheckedIcon.size.width - checkboxMargins, CGRectGetMaxY(rect) - checkedIcon.size.height - checkboxMargins)];
     }
 }
 
